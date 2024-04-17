@@ -21,7 +21,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: gp-front
+          images: ${{ secrets.REGISTRY_HOST }}/gp-front
           tags: |
             type=schedule,pattern={{date 'YYYYMMDD'}}
             type=raw,value=latest
