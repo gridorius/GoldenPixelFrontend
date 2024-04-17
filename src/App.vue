@@ -1,26 +1,38 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <Header></Header>
+  <BannerComponent></BannerComponent>
+  <ServicesComponent></ServicesComponent>
+  <StackComponent></StackComponent>
+  <AboutComponent></AboutComponent>
+<!--  <ProjectsComponent></ProjectsComponent>-->
+  <FeedBackForm></FeedBackForm>
+  <footer>
+    TOO Golden pixel {{ currentYear }} ©
+  </footer>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Header from './components/header.vue'
+import BannerComponent from './components/banner.vue'
+import AboutComponent from './components/about.vue'
+import ServicesComponent from './components/services.vue'
+import StackComponent from './components/stack.vue'
+// import ProjectsComponent from './components/projects.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    Header,
+    BannerComponent,
+    ServicesComponent,
+    StackComponent,
+    AboutComponent,
+    // ProjectsComponent,
+  },
+  computed:{
+    currentYear(){
+      return new Date().getFullYear();
+    }
   }
 }
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
