@@ -2,7 +2,7 @@
   <section>
     <div class="title">Используем в разработке</div>
 
-    <SliderComponent :items="stack.length" :speed="2">
+    <SliderComponent :items="stack.length" :speed="1">
       <div class="stack-item" :key="i" v-for="(stackItem, i) in stack">
         <img :src="stackItem" alt="" class="icon">
       </div>
