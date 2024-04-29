@@ -16,13 +16,12 @@ jobs:
           registry: ${{ secrets.REGISTRY_HOST }}
           username: ${{ secrets.REGISTRY_USER_NAME }}
           password: ${{ secrets.REGISTRY_PASSWORD }}
-          logout: false
 
       - name: Extract metadata (tags, labels) for Docker
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ${{ secrets.REGISTRY_HOST }}/gp-front
+          images: ${{ secrets.REGISTRY_HOST }}/gp-front-f
           tags: |
             type=schedule,pattern={{date 'YYYYMMDD'}}
             type=raw,value=latest
