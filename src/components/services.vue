@@ -28,7 +28,6 @@ export default {
 .service-card {
   display: grid;
   grid-gap: 10px;
-  opacity: 0;
   justify-items: center;
 
   .title {
