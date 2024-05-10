@@ -38,7 +38,7 @@ export default {
         body: JSON.stringify(this.data)
       })
           .then(r => r.json())
-          .then(r => {
+          .then(() => {
               this.close();
           });
     }
