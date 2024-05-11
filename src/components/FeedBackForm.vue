@@ -35,6 +35,9 @@ export default {
     send() {
       fetch(`https://api.golden-pixel.kz/api/Orders/Create`, {
         method: 'post',
+        headers: {
+          'Content-Type': 'application/json'
+        },
         body: JSON.stringify(this.data)
       })
           .then(r => r.json())
