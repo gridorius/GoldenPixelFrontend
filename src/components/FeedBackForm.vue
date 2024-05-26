@@ -1,16 +1,25 @@
 <template>
   <PopupWrapper v-if="show" @click="close">
     <div class="feedback-form" @click.stop>
-      <div class="close" @click="close">
-        <img src="@/assets/icons/x.svg">
+      <template v-if="!success">
+        <div class="close" @click="close">
+          <img src="@/assets/icons/x.svg">
+        </div>
+        <div class="title">
+          Свяжитесь с нами
+        </div>
+        <input type="text" placeholder="Как к вам обращаться?" v-model="data.requester">
+        <input type="email" placeholder="E-mail" v-model="data.email">
+        <textarea maxlength="300" placeholder="Комментарий (до 300 символов)" v-model="data.description"></textarea>
+        <div class="errors">
+          <div class="error" v-for="(error, i) in errors" :key="i">{{ error }}</div>
+        </div>
+        <button @click="send" class="send">Отправить</button>
+      </template>
+      <div class="success-message" v-else>
+        Заявка успешно отправлена
+        <button @click="close" class="send">Ок</button>
       </div>
-      <div class="title">
-        Свяжитесь с нами
-      </div>
-      <input type="text" placeholder="Как к вам обращаться?" v-model="data.requester">
-      <input type="email" placeholder="E-mail" v-model="data.email">
-      <textarea maxlength="300" placeholder="Комментарий (до 300 символов)" v-model="data.description"></textarea>
-      <button @click="send" class="send">Отправить</button>
     </div>
   </PopupWrapper>
 </template>
@@ -24,8 +33,10 @@ export default {
     data: {
       requester: '',
       email: '',
-      description: ''
-    }
+      description: '',
+    },
+    errors: [],
+    success: false
   }),
   emits: ['update:show'],
   methods: {
@@ -41,8 +52,17 @@ export default {
         body: JSON.stringify(this.data)
       })
           .then(r => r.json())
-          .then(() => {
+          .then(r => {
+            this.errors = [];
+            if (r.error) {
+              r.error.errorMessage.replace(/Обнаружено \d+ ошибок валидации\./, '').split(/\n/).forEach(e => this.errors.push(e));
+              return;
+            }
+            this.success = true;
+            setTimeout(() => {
               this.close();
+              this.success = false;
+            }, 5000);
           });
     }
   },
@@ -59,6 +79,18 @@ export default {
 </script>
 
 <style lang="scss">
+.errors {
+  .error {
+    color: red;
+  }
+}
+
+.success-message{
+  display: grid;
+  justify-content: center;
+  font-size: 30px;
+}
+
 .feedback-form {
   position: relative;
   color: #2E2F55;
