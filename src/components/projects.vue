@@ -1,15 +1,12 @@
 <template>
   <section id="projects">
-    <div class="title">Наши проекты</div>
-    <div class="grid2">
+    <TitleComponent>Наши работы</TitleComponent>
+    <div class="grid-two-columns">
       <template :key="i" v-for="(card, i) in projects">
         <div class="project-card">
-          <div class="background" :style="{'background-image': `url(${card.background})`}"></div>
+          <img class="icon" :src="card.image" alt="">
           <div class="title">{{ card.title }}</div>
           <div class="description">{{ card.description }}</div>
-          <div class="tehnologies">
-            <div :key="i" class="tehnology" v-for="(teh, i) in card.tehnologies">{{ teh }}</div>
-          </div>
         </div>
       </template>
     </div>
@@ -17,78 +14,46 @@
 </template>
 
 <script>
+import TitleComponent from "@/components/title.vue";
+
 export default {
   name: 'ProjectsComponent',
+  components: {TitleComponent},
   data: () => ({
     projects: []
   }),
   mounted() {
     for (let i = 0; i < 5; i++)
       this.projects.push({
+        image: require('@/assets/icons/projects/bezlimit.svg'),
         title: 'Project' + i,
         description: 'lorem ipsum dolar',
-        background: require('@/assets/bitrix-background.png'),
-        tehnologies: [
-          'Vue',
-          'Bitrix',
-          'PHP',
-          'Docker',
-        ]
       });
   }
 }
 </script>
 
-<style lang="scss">
-@import "@/assets/style/global.scss";
+<style lang="scss" scoped>
+@import "@/assets/style/global";
+
 .project-card {
-  position: relative;
   display: grid;
-  grid-template-rows: min-content min-content auto;
-  grid-gap: 10px;
-  padding: 20px;
-  background-color: $background-color_4;
-  background-blend-mode: overlay;
-  transition: background-color 0.2s linear;
-  min-height: 255px;
+  grid-template-columns: min-content auto;
+  grid-template-areas: "icon title" "description description";
+  align-items: center;
 
-  .background {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    filter: blur(1px);
-    background-size: 100%;
-    background-position: center;
-  }
-
-  &:hover {
-    background-color: $background-color_5;
+  .icon {
+    grid-area: icon;
   }
 
   .title {
-    font-size: 40px;
-    color: $color_5;
+    @extend .golden-title;
+    grid-area: title;
   }
 
   .description {
-    font-family: $font-family_2;
-    font-size: 24px;
-    color: $color_6;
-  }
-
-  .tehnologies {
-    display: flex;
-    gap: 15px;
-    font-family: $font-family_2;
-    font-size: 16px;
-    color: $color_2;
-    align-self: end;
-
-    .tehnology {
-      padding: 3px 10px;
-      background: var(--font-color);
-    }
+    @extend .description-sub-font;
+    grid-area: description;
   }
 }
 </style>

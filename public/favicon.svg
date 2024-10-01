@@ -1,3 +1,15 @@
-<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" width="1000" height="1000"><rect width="1000" height="1000" rx="200" ry="200" fill="#ffffff"></rect><g transform="matrix(15.384615384615385,0,0,15.384615384615385,101.13097228682955,215.67230784663786)"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" width="52" height="37"><svg width="52" height="37" viewBox="0 0 52 37" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M10.8108 36.48C8.69875 36.48 6.85875 36.08 5.29075 35.28C3.75475 34.48 2.55475 33.328 1.69075 31.824C0.85875 30.288 0.44275 28.48 0.44275 26.4V10.56C0.44275 8.448 0.85875 6.64 1.69075 5.136C2.55475 3.632 3.75475 2.48 5.29075 1.68C6.85875 0.879999 8.69875 0.48 10.8108 0.48C12.9228 0.48 14.7468 0.895999 16.2828 1.728C17.8188 2.528 19.0028 3.68 19.8348 5.184C20.6668 6.688 21.0828 8.48 21.0828 10.56H16.7628C16.7628 8.576 16.2348 7.056 15.1788 6C14.1548 4.912 12.6988 4.368 10.8108 4.368C8.92275 4.368 7.43475 4.896 6.34675 5.952C5.29075 7.008 4.76275 8.528 4.76275 10.512V26.4C4.76275 28.384 5.29075 29.92 6.34675 31.008C7.43475 32.096 8.92275 32.64 10.8108 32.64C12.6988 32.64 14.1548 32.096 15.1788 31.008C16.2348 29.92 16.7628 28.384 16.7628 26.4V22.08H9.65875V18.144H21.0828V26.4C21.0828 28.448 20.6668 30.24 19.8348 31.776C19.0028 33.28 17.8188 34.448 16.2828 35.28C14.7468 36.08 12.9228 36.48 10.8108 36.48ZM29.416 36V0.959999H40.696C42.872 0.959999 44.76 1.392 46.36 2.256C47.96 3.088 49.192 4.272 50.056 5.808C50.952 7.344 51.4 9.168 51.4 11.28C51.4 13.36 50.952 15.184 50.056 16.752C49.192 18.288 47.96 19.488 46.36 20.352C44.76 21.184 42.872 21.6 40.696 21.6H33.736V36H29.416ZM33.736 17.712H40.696C42.584 17.712 44.088 17.136 45.208 15.984C46.36 14.8 46.936 13.232 46.936 11.28C46.936 9.296 46.36 7.728 45.208 6.576C44.088 5.424 42.584 4.848 40.696 4.848H33.736V17.712Z" fill="#2E2F55"></path>
-</svg></svg></g></svg>
+<svg width="51" height="51" viewBox="0 0 51 51" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M2.5 2.5H48.5V48.5H2.5V2.5Z" fill="#FFE34E" stroke="#565656" stroke-width="5"/>
+<rect width="51" height="51" fill="url(#paint0_radial_145_107)"/>
+<rect width="51" height="51" fill="url(#paint1_linear_145_107)" fill-opacity="0.2"/>
+<defs>
+<radialGradient id="paint0_radial_145_107" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(15 15) rotate(52.8533) scale(20.7002)">
+<stop stop-color="#FFFEFE" stop-opacity="0.35"/>
+<stop offset="1" stop-color="#FFFEFE" stop-opacity="0"/>
+</radialGradient>
+<linearGradient id="paint1_linear_145_107" x1="0" y1="0" x2="51" y2="51" gradientUnits="userSpaceOnUse">
+<stop stop-color="white" stop-opacity="0.46"/>
+<stop offset="1" stop-opacity="0.58"/>
+</linearGradient>
+</defs>
+</svg>

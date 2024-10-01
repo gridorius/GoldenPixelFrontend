@@ -1,6 +1,31 @@
-<script>
-import FeedBackForm from "@/components/FeedBackForm.vue";
+<template>
+  <header :class="type">
+    <a href="/" class="logo">
+      <img src="@/assets/logo.svg" alt="">
+      <span class="logo-text">Golden Pixel</span>
+    </a>
+    <nav>
+      <img class="burger" src="@/assets/icons/burger_icon.svg" @click.stop="showMenu = !showMenu">
+      <ul class="top-menu" v-show="needShowMenu" @click.stop="showMenu = false">
+        <li><RouterLink class="menu-link" to="/#service">Услуги</RouterLink></li>
+        <li><RouterLink  class="menu-link" to="/#stages">Этапы разработки</RouterLink></li>
+<!--        <li><RouterLink class="menu-link" to="/#projects">Проекты</RouterLink></li>-->
+        <li><RouterLink class="menu-link" to="/prices">Прайс</RouterLink></li>
+        <li><RouterLink class="menu-link" to="/work">О разработке</RouterLink></li>
+        <li class="feedback">
+          <RouterLink class="button" to="#feedback">
+            Написать нам
+          </RouterLink>
+        </li>
+      </ul>
+    </nav>
+    <ul class="sub-menu" v-if="subMenu.length > 0">
+      <li v-for="(item, i) in subMenu" :key="i"><a :href="item.link">{{ item.title }}</a></li>
+    </ul>
+  </header>
+</template>
 
+<script>
 export default {
   name: 'HeaderComponent',
   data: () => ({
@@ -9,77 +34,91 @@ export default {
   }),
   computed: {
     needShowMenu() {
-      return window.innerWidth > 1024 || this.showMenu;
+      return window.innerWidth > 1200 || this.showMenu;
     }
   },
   mounted() {
-
+    window.addEventListener('click', () => {
+      this.showMenu = false;
+    })
   },
-  components: {
-    FeedBackForm
+  props: {
+    type: {
+      type: String,
+      default: 'main'
+    },
+    subMenu: {
+      type: Array,
+      default: () => []
+    }
   }
 };
 </script>
 
-<template>
-  <header>
-    <a href="/" class="logo"><img src="@/assets/logo.svg" alt=""></a>
-    <a href="" class="company-name"><img class="mobile-logo" src="@/assets/logo.svg" alt="">Golden Pixel</a>
-    <nav>
-      <img class="burger" src="@/assets/icons/burger_icon.svg" @click="showMenu = !showMenu">
-      <ul v-show="needShowMenu" @click="showMenu = false">
-        <li><a href="#service">Услуги</a></li>
-        <li><a href="#about">О компании</a></li>
-<!--        <li><a href="#projects">Проекты</a></li>-->
-        <li>
-          <div class="write-to-us" @click="showFeedback = true">
-            Написать нам
-          </div>
-        </li>
-      </ul>
-    </nav>
-    <FeedBackForm v-model:show="showFeedback"></FeedBackForm>
-  </header>
-</template>
-
 <style lang="scss">
+@import "@/assets/style/global";
+
 header {
-  position: sticky;
+  @extend .main-padding;
+  @extend %font-regular;
+  position: absolute;
+  box-sizing: border-box;
+  width: 100%;
   top: 0;
   display: grid;
-  grid-template-columns: 7vw auto auto;
+  grid-template-columns: 7vw auto;
   align-items: center;
-  background-color: #F3F3F3;
-  font-size: 24px;
-  padding: 0 7vw 0 0;
   height: 80px;
   z-index: 1;
+  justify-content: space-between;
+  color: $font_color_default;
+  margin-top: 10px;
 
-  @media only screen and (min-width: 321px) and (max-device-width: 1024px) {
+  &.white {
+    opacity: 1;
+    color: $font_color_light;
+
+    .menu-link{
+      &:hover{
+        border-bottom-color: $font_color_light !important;
+      }
+    }
+  }
+
+  @media (max-width: 1024px) {
     grid-template-columns: 7vw auto;
-  }
 
-  @media only screen and (min-device-width: 1024px) and (max-device-width: 1160px) {
-    font-size: 20px;
-  }
-
-  .mobile-logo {
-    display: none;
-    @media only screen and (min-width: 321px) and (max-device-width: 1024px) {
-      display: inherit;
+    .feedback{
+      margin-top: 10px;
     }
   }
 
   .burger {
     display: none;
-    @media only screen and (min-width: 321px) and (max-device-width: 1024px) {
+    @media (max-width: 1200px) {
       display: initial;
       float: right;
     }
   }
 
+  ul.sub-menu {
+    margin: 20px 0;
+    padding: 10px 0;
+    display: flex;
+    list-style: none;
+    gap: 10px;
+    width: 100%;
+    grid-column: 1/3;
+    border-top: 1px solid $font_color_light;
+    font-size: 18px;
 
-  ul {
+    li:not(:first-child) {
+      border-left: 1px solid $font_color_light;
+      padding-left: 10px;
+    }
+  }
+
+  ul.top-menu {
     position: relative;
     display: flex;
     padding: 0;
@@ -88,40 +127,48 @@ header {
     justify-content: end;
     align-items: center;
     list-style: none;
-    color: var(--font-color);
     font-family: "Roboto", sans-serif;
-    @media only screen and (min-width: 321px) and (max-device-width: 1024px) {
+    @media (max-width: 1200px) {
       position: absolute;
       top: 90px;
-      right: 7vw;
+      right: 0;
       flex-direction: column;
-      background: #F3F3F3;
-      padding: 10px;
+      background: $color_dark;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.51);
+      align-items: start;
+      color: $font_color_light;
+      grid-gap: 20px;
     }
-  }
 
-  .write-to-us {
-    padding: 10px 55px;
-    background-color: var(--font-color);
-    color: #F3F3F3;
-    font-weight: bold;
-    font-size: 22px;
-    cursor: pointer;
-    @media only screen and (min-device-width: 1024px) and (max-device-width: 1160px) {
-      font-size: 16px;
+    .menu-link{
+      padding: 10px 0;
+      border-bottom: 2px solid transparent;
+      transition: all .2s linear;
+      &:hover{
+       border-bottom-color: $color_dark;
+      }
     }
   }
 
   .logo {
-    justify-self: end;
-    @media only screen and (min-width: 321px) and (max-device-width: 1024px) {
-      display: none;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(2, max-content);
+    align-items: center;
+
+    .logo-text{
+      @extend %font-middle;
+      @media (max-width: 1024px) {
+        color: $font_color_light;
+      }
+      font-family: $font_family_jetbrains;
     }
   }
 
   a {
-    color: var(--font-color);
     text-decoration: none;
+    color: inherit;
   }
 }
 </style>
