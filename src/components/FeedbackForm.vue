@@ -10,7 +10,14 @@
         <div class="counter">{{ client.description.length }}/{{ commentLimit }}</div>
       </div>
       <div class="text">Мы свяжемся с вами в ближайшее время.</div>
-      <button @click="send" class="button">Написать нам</button>
+      <div class="send-container">
+        <div class="errors">
+          <div v-for="(error, i) in errors" :key="i" class="error">
+            {{error}}
+          </div>
+        </div>
+        <button @click="send" class="button">Написать нам</button>
+      </div>
     </div>
   </section>
 </template>
@@ -27,7 +34,9 @@ export default {
       email: '',
       description: '',
     },
-    commentLimit: 500
+    commentLimit: 500,
+    errors: [
+    ]
   }),
   methods: {
     commentInput(e) {
@@ -45,7 +54,7 @@ export default {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(this.data)
+        body: JSON.stringify(this.client)
       })
           .then(r => r.json())
           .then(r => {
@@ -69,6 +78,7 @@ export default {
 @import "../assets/style/global";
 
 .feedback-form {
+  grid-row-gap: 20px;
   input {
     @extend %font-regular;
 
@@ -81,8 +91,17 @@ export default {
     width: 100%;
   }
 
+  .errors{
+    margin-bottom: 10px;
+    .error{
+      @extend %font-regular;
+      color: red;
+    }
+  }
+
   .comment {
     width: 100%;
+    position: relative;
 
     textarea {
       @extend %font-regular;
@@ -98,6 +117,9 @@ export default {
 
     .counter {
       @extend %font-regular;
+      position: absolute;
+      bottom: 5px;
+      right: 10px;
       color: $font_color_light;
       float: right;
       margin-top: 5px;
