@@ -6,7 +6,6 @@
     <ServiceComponent></ServiceComponent>
     <DevelopmentStages></DevelopmentStages>
 <!--    <ProjectsComponent></ProjectsComponent>-->
-    <FeedbackForm></FeedbackForm>
     <FooterComponent></FooterComponent>
   </div>
 </template>
@@ -14,7 +13,6 @@
 <script>
 // import ProjectsComponent from "@/components/projects.vue";
 import Header from "@/components/HeaderComponent.vue";
-import FeedbackForm from "@/components/FeedbackForm.vue";
 import FooterComponent from "@/components/FooterComponent.vue";
 import BackgroundElements from "@/components/BackgroundElements.vue";
 import Preview from "@/components/PreviewComponent.vue";
@@ -29,7 +27,6 @@ export default {
     Preview,
     BackgroundElements,
     FooterComponent,
-    FeedbackForm,
     Header,
     // ProjectsComponent
   }

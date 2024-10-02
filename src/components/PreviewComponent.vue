@@ -14,7 +14,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  @import "../assets/style/global";
+  @import "../assets/main";
   .preview{
     @extend .grid-two-columns;
     align-items: center;

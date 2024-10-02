@@ -180,13 +180,9 @@ ul.golden-points{
   }
 }
 
-.full-height {
-  min-height: 100vh;
-}
-
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity .3s ease;
+  transition: opacity .5s linear;
 }
 
 .fade-enter-from,

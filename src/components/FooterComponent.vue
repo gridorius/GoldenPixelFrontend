@@ -1,5 +1,6 @@
 <template>
   <section>
+    <FeedbackForm/>
     <footer>
       <div class="grid-two-columns">
         <div class="copyright">
@@ -33,8 +34,8 @@
             <div class="description">
               <div class="item">
                 <div class="social-icons">
-                  <a href="https://t.me/golden_pixel_web"><img src="../assets/social/telegram_icon.svg" alt="telegram"></a>
-<!--                  <a href=""><img src="../assets/social/whatsapp_icon.svg" alt="whatsapp"></a>-->
+                  <a href="https://t.me/golden_pixel_web"><img src="../assets/icons/social/telegram_icon.svg" alt="telegram"></a>
+                  <!--                  <a href=""><img src="../assets/social/whatsapp_icon.svg" alt="whatsapp"></a>-->
                 </div>
               </div>
             </div>
@@ -46,12 +47,15 @@
 </template>
 
 <script>
+import FeedbackForm from "@/components/FeedbackForm.vue";
+
 export default {
-  name: "FooterComponent"
+  name: "FooterComponent",
+  components: {FeedbackForm}
 }
 </script>
 <style scoped lang="scss">
-@import "../assets/style/global";
+@import "../assets/main";
 
 footer {
   margin-top: 100px;
@@ -69,7 +73,7 @@ footer {
   .copyright {
     @extend %font-regular;
     font-family: $font_family_roboto;
-    color: $font_color_sub_light;
+    color: #555;
     align-self: end;
     @media (max-width: 768px) {
       grid-row: 2/3;

@@ -34,7 +34,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/style/global";
+@import "@/assets/main";
 
 .project-card {
   display: grid;

@@ -11,7 +11,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  @import "../assets/style/global";
+  @import "../assets/main";
   .title{
     @extend .main-margin;
     @extend %font-large;

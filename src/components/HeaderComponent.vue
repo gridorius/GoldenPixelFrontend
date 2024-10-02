@@ -56,7 +56,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "@/assets/style/global";
+@import "@/assets/main";
 
 header {
   @extend .main-padding;
