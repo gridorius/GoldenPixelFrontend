@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import TitleComponent from "@/components/title.vue";
+import TitleComponent from "@/components/TitleComponent.vue";
 
 export default {
   name: 'ProjectsComponent',

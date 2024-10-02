@@ -20,12 +20,11 @@ export default {
     border-bottom: 1px solid $font_color_light;
     text-align: center;
     margin-top: 100px;
-    margin-bottom: 100px;
+    margin-bottom: 50px;
     padding: 10px;
     color: $font_color_light;
     @media (max-width: 1024px) {
       margin-top: 50px;
-      margin-bottom: 50px;
     }
     @media (max-width: 768px) {
       margin-top: 25px;

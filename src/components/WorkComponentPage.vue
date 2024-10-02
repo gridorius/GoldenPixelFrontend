@@ -11,8 +11,8 @@
 
 <script>
 
-import FooterComponent from "@/components/footer.vue";
-import Header from "@/components/header.vue";
+import FooterComponent from "@/components/FooterComponent.vue";
+import Header from "@/components/HeaderComponent.vue";
 import FeedbackForm from "@/components/FeedbackForm.vue";
 import WorkComponent from "@/components/WorkComponent.vue";
 
