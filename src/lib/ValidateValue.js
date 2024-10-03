@@ -41,15 +41,32 @@ export default class ValidateValue {
 
     min(min, message) {
         if (!this.value) return this;
-        if (this.value < min)
-            this.validator.addError(message);
+        switch (typeof this.value) {
+            case "number":
+                if (this.value < min)
+                    this.validator.addError(message);
+                break;
+            case "string":
+                if (this.value.length < min)
+                    this.validator.addError(message);
+                break;
+        }
         return this;
     }
 
     max(max, message) {
         if (!this.value) return this;
-        if (this.value > max)
-            this.validator.addError(message);
+        switch (typeof this.value) {
+            case "number":
+                if (this.value > max)
+                    this.validator.addError(message);
+                break;
+            case "string":
+                if (this.value.length > max)
+                    this.validator.addError(message);
+                break;
+        }
+
         return this;
     }
 }

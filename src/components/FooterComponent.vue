@@ -29,6 +29,14 @@
           </div>
           <div class="contacts-data">
             <div class="title">
+              Адрес:
+            </div>
+            <div class="description">
+              <div class="item">г.Алматы, Алмалинский район, улица Шевченко, дом 118, офис 314</div>
+            </div>
+          </div>
+          <div class="contacts-data">
+            <div class="title">
               Социальные сети:
             </div>
             <div class="description">

@@ -1,5 +1,6 @@
 <template>
   <section id="feedback">
+    <PersonalConditions v-model:show="showPersonalConditions"></PersonalConditions>
     <TitleComponent>Свяжитесь с нами</TitleComponent>
     <div v-if="!success" class="grid-two-columns feedback-form">
       <input v-model="client.requester" type="text" placeholder="Как к вам обращаться?">
@@ -13,10 +14,16 @@
       <div class="send-container">
         <div class="errors">
           <div v-for="(error, i) in errors" :key="i" class="error">
-            {{error}}
+            {{ error }}
           </div>
         </div>
-        <button @click="send" class="button">Написать нам</button>
+        <label class="personal-conditions">
+          <input v-model="personalAccess" type="checkbox">
+          <span>Согласен на обработку</span>
+          <a href="javascript:void(0)" @click="showPersonalConditions = true">персональных данных</a>
+        </label>
+        <br>
+        <button :disabled="!personalAccess" @click="send" class="button">Написать нам</button>
       </div>
     </div>
     <div v-else class="success-sending">
@@ -29,10 +36,12 @@
 
 <script>
 import TitleComponent from "@/components/TitleComponent.vue";
+import PersonalConditions from "@/components/PersonalConditions.vue";
+import Validator from "@/lib/Validator";
 
 export default {
   name: "FeedbackForm",
-  components: {TitleComponent},
+  components: {PersonalConditions, TitleComponent},
   data: () => ({
     client: {
       requester: '',
@@ -41,8 +50,9 @@ export default {
     },
     success: false,
     commentLimit: 500,
-    errors: [
-    ]
+    showPersonalConditions: false,
+    errors: [],
+    personalAccess: false
   }),
   methods: {
     commentInput(e) {
@@ -55,6 +65,22 @@ export default {
       this.client.description = this.client.description.substring(0, this.commentLimit);
     },
     send() {
+      this.errors = [];
+      if (!this.personalAccess) {
+        this.errors.push("Подтвердите согласие на обработку данных");
+        return;
+      }
+
+      let validator = new Validator(this.client);
+      validator.validate(i => i.requester).required('Не заполнено имя').max(150, "Слишком длинное имя (до 150 символов)");
+      validator.validate(i => i.email).required('Не заполнен E-mail').max(256, "Слишком длинный e-mail (до 256 символов)")
+          .regex(/^[\w-\\.]+@([\w-]+\.)+[\w-]{2,4}$/, 'Указан некорректный e-mail');
+
+      if(!validator.isSuccess()){
+        this.errors = validator.getErrors();
+        return;
+      }
+
       fetch(`https://api.golden-pixel.kz/api/Orders/Create`, {
         method: 'post',
         headers: {
@@ -64,7 +90,6 @@ export default {
       })
           .then(r => r.json())
           .then(r => {
-            this.errors = [];
             if (r.error) {
               r.error.errorMessage.replace(/Обнаружено \d+ ошибок валидации\./, '').split(/\n/).forEach(e => this.errors.push(e));
               return;
@@ -79,14 +104,34 @@ export default {
 <style scoped lang="scss">
 @import "../assets/main";
 
-.success-sending{
+.send-container {
+  width: 100%;
+
+  .personal-conditions {
+    @extend %font-regular;
+    display: flex;
+    color: $font_color_light;
+    gap: 5px;
+
+    input {
+      width: 20px;
+    }
+
+    a {
+      color: $font_color_light_golden;
+      text-decoration: none;
+    }
+  }
+}
+
+.success-sending {
   @extend .main-margin;
   @extend %font-middle;
   display: grid;
   justify-items: center;
   color: $font_color_light;
 
-  .text{
+  .text {
     background: #4daa4d;
     padding: 20px 40px;
   }
@@ -94,6 +139,7 @@ export default {
 
 .feedback-form {
   grid-row-gap: 20px;
+
   input {
     @extend %font-regular;
 
@@ -106,13 +152,14 @@ export default {
     width: 100%;
   }
 
-  &:invalid{
+  &:invalid {
     border-color: red;
   }
 
-  .errors{
+  .errors {
     margin-bottom: 10px;
-    .error{
+
+    .error {
       @extend %font-regular;
       color: red;
     }
