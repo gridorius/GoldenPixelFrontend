@@ -25,6 +25,7 @@
             </div>
             <div class="description">
               <div class="item"> request@golden-pixel.kz</div>
+              <div class="item"> graure@yandex.ru</div>
             </div>
           </div>
           <div class="contacts-data">
@@ -42,7 +43,8 @@
             <div class="description">
               <div class="item">
                 <div class="social-icons">
-                  <a href="https://t.me/golden_pixel_web"><img src="../assets/icons/social/telegram_icon.svg" alt="telegram"></a>
+                  <a href="https://t.me/golden_pixel_web"><img src="../assets/icons/social/telegram_icon.svg"
+                                                               alt="telegram"></a>
                   <!--                  <a href=""><img src="../assets/social/whatsapp_icon.svg" alt="whatsapp"></a>-->
                 </div>
               </div>
