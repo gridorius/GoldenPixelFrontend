@@ -23,7 +23,7 @@
           <a href="javascript:void(0)" @click="showPersonalConditions = true">персональных данных</a>
         </label>
         <br>
-        <button :disabled="!personalAccess" @click="send" class="button">Написать нам</button>
+        <button :disabled="sendDisabled" @click="send" class="button">Написать нам</button>
       </div>
     </div>
     <div v-else class="success-sending">
@@ -54,6 +54,11 @@ export default {
     errors: [],
     personalAccess: false
   }),
+  computed: {
+    sendDisabled() {
+      return !this.personalAccess || !this.validation().isSuccess();
+    }
+  },
   methods: {
     commentInput(e) {
       if (e.key === 'Backspace')
@@ -64,6 +69,14 @@ export default {
 
       this.client.description = this.client.description.substring(0, this.commentLimit);
     },
+    validation() {
+      let validator = new Validator(this.client);
+      validator.validate(i => i.requester).required('Не заполнено имя').max(150, "Слишком длинное имя (до 150 символов)");
+      validator.validate(i => i.email).required('Не заполнен E-mail').max(256, "Слишком длинный e-mail (до 256 символов)")
+          .regex(/^[\w-\\.]+@([\w-]+\.)+[\w-]{2,4}$/, 'Указан некорректный e-mail');
+
+      return validator;
+    },
     send() {
       this.errors = [];
       if (!this.personalAccess) {
@@ -71,13 +84,9 @@ export default {
         return;
       }
 
-      let validator = new Validator(this.client);
-      validator.validate(i => i.requester).required('Не заполнено имя').max(150, "Слишком длинное имя (до 150 символов)");
-      validator.validate(i => i.email).required('Не заполнен E-mail').max(256, "Слишком длинный e-mail (до 256 символов)")
-          .regex(/^[\w-\\.]+@([\w-]+\.)+[\w-]{2,4}$/, 'Указан некорректный e-mail');
-
-      if(!validator.isSuccess()){
-        this.errors = validator.getErrors();
+      let validation = this.validation();
+      if (!validation.isSuccess()) {
+        this.errors = validation.getErrors();
         return;
       }
 
