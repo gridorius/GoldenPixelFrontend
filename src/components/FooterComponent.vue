@@ -4,7 +4,7 @@
     <footer>
       <div class="grid-two-columns">
         <div class="copyright">
-          Golden pixel 2024 ©
+          Golden pixel {{ year }} ©
         </div>
         <div class="contacts">
           <div class="golden-title title">
@@ -61,7 +61,12 @@ import FeedbackForm from "@/components/FeedbackForm.vue";
 
 export default {
   name: "FooterComponent",
-  components: {FeedbackForm}
+  components: {FeedbackForm},
+  computed: {
+    year() {
+      return new Date().getFullYear();
+    }
+  }
 }
 </script>
 <style scoped lang="scss">
