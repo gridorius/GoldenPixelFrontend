@@ -2,9 +2,10 @@
   <section id="feedback">
     <PersonalConditions v-model:show="showPersonalConditions"></PersonalConditions>
     <TitleComponent>Свяжитесь с нами</TitleComponent>
-    <div v-if="!success" class="grid-two-columns feedback-form">
-      <input v-model="client.requester" type="text" placeholder="Как к вам обращаться?">
-      <input v-model="client.email" type="email" placeholder="E-mail">
+    <div @input="validateForm" v-if="!success" class="grid-two-columns feedback-form">
+      <input :class="{invalid: errorFields['requester']}" v-model="client.requester" type="text"
+             placeholder="Как к вам обращаться?">
+      <input :class="{invalid: errorFields['email']}" v-model="client.email" type="email" placeholder="E-mail">
       <div class="comment">
         <textarea @paste="commentInput" @keydown="commentInput" v-model="client.description" rows="5"
                   placeholder="Комментарий"></textarea>
@@ -18,7 +19,7 @@
           </div>
         </div>
         <label class="personal-conditions">
-          <input v-model="personalAccess" type="checkbox">
+          <input @change="validateForm" v-model="personalAccess" type="checkbox">
           <span>Согласен на обработку</span>
           <a href="javascript:void(0)" @click="showPersonalConditions = true">персональных данных</a>
         </label>
@@ -52,14 +53,23 @@ export default {
     commentLimit: 500,
     showPersonalConditions: false,
     errors: [],
-    personalAccess: false
+    errorFields: {},
+    personalAccess: false,
+    sendDisabled: true
   }),
-  computed: {
-    sendDisabled() {
-      return !this.personalAccess || !this.validation().isSuccess();
-    }
-  },
+  computed: {},
   methods: {
+    validateForm() {
+      let validation = this.validation();
+      if (!validation.isSuccess()) {
+        this.errors = validation.getErrors();
+        this.errorFields = validation.getErrorFields();
+      } else {
+        this.errors = [];
+        this.errorFields = {};
+      }
+      this.sendDisabled = !this.personalAccess || !validation.isSuccess();
+    },
     commentInput(e) {
       if (e.key === 'Backspace')
         return;
@@ -71,8 +81,12 @@ export default {
     },
     validation() {
       let validator = new Validator(this.client);
-      validator.validate(i => i.requester).required('Не заполнено имя').max(150, "Слишком длинное имя (до 150 символов)");
-      validator.validate(i => i.email).required('Не заполнен E-mail').max(256, "Слишком длинный e-mail (до 256 символов)")
+      validator.validate(i => i.requester)
+          .setField('requester')
+          .required('Не заполнено имя').max(150, "Слишком длинное имя (до 150 символов)");
+      validator.validate(i => i.email)
+          .setField('email')
+          .required('Не заполнен E-mail').max(256, "Слишком длинный e-mail (до 256 символов)")
           .regex(/^[\w-\\.]+@([\w-]+\.)+[\w-]{2,4}$/, 'Указан некорректный e-mail');
 
       return validator;
@@ -125,11 +139,6 @@ export default {
     input {
       width: 20px;
     }
-
-    a {
-      color: $font_color_light_golden;
-      text-decoration: none;
-    }
   }
 }
 
@@ -170,8 +179,12 @@ export default {
 
     .error {
       @extend %font-regular;
-      color: red;
+      color: #ff4848;
     }
+  }
+
+  input.invalid {
+    border-bottom: 2px solid #ff4848;
   }
 
   .comment {

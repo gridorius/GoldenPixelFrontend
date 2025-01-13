@@ -3,8 +3,27 @@
     <FeedbackForm/>
     <footer>
       <div class="grid-two-columns">
-        <div class="copyright">
-          Golden pixel {{ year }} ©
+        <div class="left">
+          <div class="golden-title title">
+            Навигация по сайту:
+          </div>
+          <ul class="bottom-menu">
+            <li>
+              <RouterLink class="menu-link" to="/#service">Услуги</RouterLink>
+            </li>
+            <li>
+              <RouterLink class="menu-link" to="/#stages">Этапы разработки</RouterLink>
+            </li>
+            <li>
+              <RouterLink class="menu-link" to="/bitrix">О Bitrix24</RouterLink>
+            </li>
+            <li>
+              <RouterLink class="menu-link" to="/prices">Прайс</RouterLink>
+            </li>
+            <li>
+              <RouterLink class="menu-link" to="/work">О разработке</RouterLink>
+            </li>
+          </ul>
         </div>
         <div class="contacts">
           <div class="golden-title title">
@@ -43,13 +62,17 @@
             <div class="description">
               <div class="item">
                 <div class="social-icons">
-                  <a href="https://t.me/golden_pixel_web"><img src="../assets/icons/social/telegram_icon.svg"
-                                                               alt="telegram"></a>
+                  <a target="_blank" href="https://t.me/golden_pixel_web"><img
+                      src="../assets/icons/social/telegram_icon.svg"
+                      alt="telegram"></a>
                   <!--                  <a href=""><img src="../assets/social/whatsapp_icon.svg" alt="whatsapp"></a>-->
                 </div>
               </div>
             </div>
           </div>
+        </div>
+        <div class="copyright">
+          Golden pixel {{ year }} ©
         </div>
       </div>
     </footer>
@@ -77,12 +100,36 @@ footer {
   padding: 50px 0;
   background: #0f1318;
 
+
+  .left {
+    display: grid;
+    height: 100%;
+    align-content: start;
+
+    .bottom-menu {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+
+      li {
+        padding: 5px 0;
+        a{
+          @extend %font-regular;
+          color: $font_color_light;
+        }
+      }
+    }
+  }
+
   @media (max-width: 768px) {
     margin-top: 30px;
   }
 
   .title {
     margin-bottom: 30px;
+    @media (max-width: 768px) {
+      margin-bottom: 10px;
+    }
   }
 
   .copyright {
@@ -90,9 +137,6 @@ footer {
     font-family: $font_family_roboto;
     color: #555;
     align-self: end;
-    @media (max-width: 768px) {
-      grid-row: 2/3;
-    }
   }
 
   .contacts-data {

@@ -2,25 +2,35 @@ export default class ValidateValue {
     constructor(validator, value) {
         this.validator = validator;
         this.value = value;
+        this.field = null;
+    }
+
+    setField(field) {
+        this.field = field;
+        return this;
+    }
+
+    getField() {
+        return this.field;
     }
 
     regex(regex, message) {
         if (!this.value) return this;
         if (!regex.test(this.value))
-            this.validator.addError(message);
+            this.validator.addError(message, this);
         return this;
     }
 
     custom(callback, message) {
         if (!this.value) return this;
         if (!callback(this.value, this))
-            this.validator.addError(message);
+            this.validator.addError(message, this);
         return this;
     }
 
     required(message) {
         if (!this.value)
-            this.validator.addError(message);
+            this.validator.addError(message, this);
         return this;
     }
 

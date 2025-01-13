@@ -4,12 +4,16 @@
       <component :is="Component"/>
     </transition>
   </RouterView>
+  <UpComponent/>
 </template>
 
 <script>
 
+import UpComponent from "@/components/UpComponent.vue";
+
 export default {
   name: 'App',
+  components: {UpComponent},
   watch: {
     $route: {
       immediate: true,

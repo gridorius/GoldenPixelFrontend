@@ -47,6 +47,20 @@ $font_family_jetbrains: "JetBrains Mono", monospace;
   }
 }
 
+@media (max-width: 420px) {
+  %font-large {
+    font-size: 23px;
+  }
+
+  %font-middle {
+    font-size: 18px;
+  }
+
+  %font-regular {
+    font-size: 13px;
+  }
+}
+
 body {
   margin: 0;
   font-family: $font_family_roboto;
@@ -193,4 +207,14 @@ ul.golden-points{
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
+}
+
+a {
+  color: $font_color_light_golden;
+  text-decoration: none;
+  opacity: .8;
+
+  &:hover{
+    opacity: 1;
+  }
 }

@@ -52,7 +52,18 @@ export default {
       anime({
         targets: e,
         left: anime.random(-100, window.innerWidth),
-        duration: anime.random(20000, 40000)
+        duration: anime.random(20000, 40000),
+        complete: function () {
+          let translation = anime.random(-300, 300);
+          anime({
+            targets: e,
+            translateX: translation,
+            duration: 10000,
+            direction: 'alternate',
+            easing: 'linear',
+            loop: true,
+          })
+        }
       })
     });
 
@@ -68,7 +79,18 @@ export default {
       anime({
         targets: e,
         left: anime.random(-100, window.innerWidth),
-        duration: anime.random(25000, 50000)
+        duration: anime.random(25000, 50000),
+        complete: function () {
+          let translation = anime.random(-200, 200);
+          anime({
+            targets: e,
+            translateX: translation,
+            duration: 10000,
+            direction: 'alternate',
+            easing: 'linear',
+            loop: true,
+          })
+        }
       })
     });
 

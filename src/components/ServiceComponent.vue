@@ -4,7 +4,10 @@
     <div class="grid-two-columns elements">
       <div v-for="(element, i) in elements" :key="i" class="card">
         <div class="title">{{ element.title }}</div>
-        <div class="description">{{ element.description }}</div>
+        <div class="description">
+          <span v-html="element.description"></span>
+          <router-link v-if="element.details" :to="element.details"> Подробнее...</router-link>
+        </div>
       </div>
     </div>
   </section>
@@ -21,7 +24,8 @@ export default {
       {
         title: 'Внедрение CRM Bitrix',
         description: 'Сделайте работу ваших сотрудников более быстрой и комфортной благодаря автоматизации бизнес-процессов с CRM Bitrix и интеграции сторонних систем. \n' +
-            'Избавим от рутинных действий, таких как рассылка почты, контроль сотрудников, оценка эффективности продаж.'
+            'Избавим от рутинных действий, таких как рассылка почты, контроль сотрудников, оценка эффективности продаж.',
+        details: '/bitrix'
       },
       {
         title: 'Landing Pages',

@@ -5,6 +5,7 @@ import {createRouter, createWebHistory} from "vue-router";
 import App from "@/App.vue";
 import PricesComponent from "@/components/PricesPageComponent.vue";
 import WorkComponentPage from "@/components/WorkComponentPage.vue";
+import BitrixIntegrationPage from "@/components/BitrixIntegrationPage.vue";
 
 
 const routes = [
@@ -24,6 +25,12 @@ const routes = [
         path: '/work', component: WorkComponentPage,
         meta: {
             title: 'О разработке'
+        }
+    },
+    {
+        path: '/bitrix', component: BitrixIntegrationPage,
+        meta: {
+            title: 'О CRM Bitrix24'
         }
     },
 ]

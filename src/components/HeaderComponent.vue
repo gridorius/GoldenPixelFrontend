@@ -10,6 +10,7 @@
         <li><RouterLink class="menu-link" to="/#service">Услуги</RouterLink></li>
         <li><RouterLink  class="menu-link" to="/#stages">Этапы разработки</RouterLink></li>
 <!--        <li><RouterLink class="menu-link" to="/#projects">Проекты</RouterLink></li>-->
+        <li><RouterLink class="menu-link" to="/bitrix">О Bitrix24</RouterLink></li>
         <li><RouterLink class="menu-link" to="/prices">Прайс</RouterLink></li>
         <li><RouterLink class="menu-link" to="/work">О разработке</RouterLink></li>
         <li class="feedback">
